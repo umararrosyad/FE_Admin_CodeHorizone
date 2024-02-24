@@ -1,7 +1,6 @@
 // const axios = require('axios');
 
 import { instance as axios } from "../axios";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTcwNjc5MDczNn0.crNpraUq0j84lSvWzqQAVdmx1JOWsZmRa4kwpChEpZU";
 const getAllWerehouse = async (page, searchTerm) => {
   try {
     const params = {
@@ -9,6 +8,19 @@ const getAllWerehouse = async (page, searchTerm) => {
       name: searchTerm
     };
     const response = await axios.get("/api/v1/werehouses/", { params });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getonlyWerehouse = async (page, searchTerm) => {
+  try {
+    const params = {
+      page,
+      name: searchTerm
+    };
+    const response = await axios.get("/api/v1/werehouses/only", { params });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -63,4 +75,4 @@ const deleteWerehouse = async (id) => {
   }
 };
 
-module.exports = { getAllWerehouse, createWerehouse, updateWerehouse, deleteWerehouse };
+module.exports = { getAllWerehouse, createWerehouse, getonlyWerehouse, updateWerehouse, deleteWerehouse };

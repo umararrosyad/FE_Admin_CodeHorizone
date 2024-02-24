@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { initFlowbite } from "flowbite";
@@ -8,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
-import Products from "@/layout/products_copy";
+import Products from "@/layout/products";
 import Categories from "@/layout/categories";
 import Dashboard from "@/layout/dashboard";
 import Werehouse from "@/layout/werehouse";
@@ -48,8 +50,9 @@ export default function DashboardSidebarLayout({ children }) {
       <Navbar />
       <Sidebar location={location} />
       <div className=" sm:ml-64 mt-16">
-        <Categories />
+        <Products />
       </div>
+      
     </div>
   );
 }

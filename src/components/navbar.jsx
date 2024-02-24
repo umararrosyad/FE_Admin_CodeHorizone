@@ -5,14 +5,11 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full bg-gray-800 border-b border-gray-900 dark:bg-gray-800 dark:border-gray-700 ">
+      <nav className="fixed top-0 z-50 w-full bg-gray-800 border-b border-gray-500 dark:bg-gray-800 dark:border-gray-700 ">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <button
-                data-drawer-target="logo-sidebar"
-                data-drawer-toggle="logo-sidebar"
-                aria-controls="logo-sidebar"
                 type="button"
                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
@@ -25,7 +22,7 @@ const Navbar = () => {
                   ></path>
                 </svg>
               </button>
-              <Link href="https://flowbite.com" className="flex ml-2 md:mr-24">
+              <Link href="/dashboard" className="flex ml-2 md:mr-24">
                 <Image className="ml-3" src={logo} width={100} height={100} alt="/" />
               </Link>
             </div>
@@ -40,15 +37,15 @@ const Navbar = () => {
                 <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                   <div className="px-4 py-3" role="none">
                     <p className="text-sm text-gray-900 dark:text-white" role="none">
-                      Neil Sims
+                      ADMIN
                     </p>
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                      neil.sims@flowbite.com
+                      admin@admin.com
                     </p>
                   </div>
                   <ul className="py-1" role="none">
                     <li>
-                      <Link href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-500 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-500 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" onClick={() => localStorage.removeItem("token")}>
                         Sign out
                       </Link>
                     </li>

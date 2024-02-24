@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
-import Products from "@/layout/products_copy";
+import Products from "@/layout/products";
 import Categories from "@/layout/categories";
 import Dashboard from "@/layout/dashboard";
 import Werehouse from "@/layout/werehouse";

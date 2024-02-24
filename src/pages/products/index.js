@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { initFlowbite } from "flowbite";
@@ -8,10 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
-import Products from "@/layout/products_copy";
-import Categories from "@/layout/categories";
-import Dashboard from "@/layout/dashboard";
-import Werehouse from "@/layout/werehouse";
+import Tabs from "@/components/tabsProductsCreate";
+import Form from "@/components/formProductsCreate";
 
 import { useRouter } from "next/router";
 
@@ -24,19 +24,6 @@ export default function DashboardSidebarLayout({ children }) {
   const location = useSelector((state) => state.sidebar.sideLocation);
 
   useEffect(() => {
-    if (location === "dashboard") {
-      router.push("/dashboard");
-    } else if (location === "products") {
-      router.push("/dashboard/products");
-    } else if (location === "categories") {
-      router.push("/dashboard/categories");
-    } else if (location === "werehouse") {
-      router.push("/dashboard/werehouses");
-    }
-    initFlowbite();
-  }, [location]);
-
-  useEffect(() => {
     //get current url path
     setActiveLink(pathname);
     //init flowbite
@@ -46,10 +33,13 @@ export default function DashboardSidebarLayout({ children }) {
   return (
     <div>
       <Navbar />
-      <Sidebar location={location} />
-      <div className=" sm:ml-64 mt-16">
-        <Categories />
+      <div className=" sm:mx-14 mt-20">
+        <div class="md:flex">
+          <Tabs />
+          <Form />
+        </div>
       </div>
+      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
     </div>
   );
 }

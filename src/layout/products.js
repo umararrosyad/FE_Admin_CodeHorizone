@@ -3,29 +3,31 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSWR from "swr";
-import { getAllCategories, createCategory, updateCategory, deleteCategory } from "../modules/fetch/categories";
+import { getAllProducts, createProducts, updateProducts, deleteProducts } from "../modules/fetch/products";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState();
+  const [product, setProduct] = useState();
   const [deleteModal, setDeleteModal] = useState(false);
 
-  const [categories, setCategories] = useState();
+  const [products, setProducts] = useState();
   const [saving, setSaving] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
 
   const loadingRowsCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: products, error } = useSWR("https://api.escuelajs.co/api/v1/products", fetcher);
+  // const { data: products, error } = useSWR("https://api.escuelajs.co/api/v1/products", fetcher);
 
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await getAllCategories(currentPage, searchTerm);
-        console.log(response.data);
-        setCategories(response);
+        const response = await getAllProducts(currentPage, searchTerm);
+        console.log(response.data[0]);
+        setProducts(response);
       } catch (e) {
         console.log(e);
       }
@@ -45,7 +47,10 @@ export default function Page() {
               Photo
             </th>
             <th scope="col" className="px-6 py-3">
-              Action
+              category
+            </th>
+            <th scope="col" className="px-6 py-3">
+              action
             </th>
           </tr>
         </thead>
@@ -54,20 +59,22 @@ export default function Page() {
             <tr key={`${item.id}`} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
               <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                 <div className="pl-3 flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <div className="text-base font-semibold">{item.category_name}</div>
+                  <div className="text-base font-semibold">{item.name}</div>
                   {/* <div className="font-normal text-gray-500">neil.sims@flowbite.com</div> */}
                 </div>
               </th>
-              <td className="px-6 py-4">
-                <img className="w-20 h-20 rounded-xl" src={item.photo_url} alt="Jese image" />
+              <td className="py-4">{item.product_galleries[0] && <img className="w-20 h-20 rounded-xl object-contain" src={item.product_galleries[0].photo_url} alt={item.product_galleries[0].photo_url} />}</td>
+              <td className="py-4">
+                <div className="pl-3 text-gray-900 whitespace-nowrap dark:text-white">
+                  <div className="text-base font-semibold">{item.category.category_name}</div>
+                </div>
               </td>
               <td className="px-6 py-4">
                 <button
                   type="button"
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   onClick={() => {
-                    setCategory(item);
-                    setShowModal(true);
+                    router.push(`/products/${item.id}`);
                   }}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
@@ -81,7 +88,7 @@ export default function Page() {
                 <button
                   className="font-medium text-red-600 dark:text-red-500 hover:underline ml-4"
                   onClick={() => {
-                    setCategory(item);
+                    setProduct(item);
                     setDeleteModal(true);
                   }}
                 >
@@ -120,17 +127,12 @@ export default function Page() {
               Search
             </label>
             <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                </svg>
-              </div>
               <input
                 type="text"
                 value={searchTerms}
                 onChange={handleChange}
                 id="simple-search"
-                className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-2 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Search"
                 required=""
               />
@@ -149,8 +151,7 @@ export default function Page() {
             data-modal-target="authentication-modal"
             data-modal-toggle="authentication-modal"
             onClick={() => {
-              setCategory(null);
-              setShowModal(true);
+              router.push("/products");
             }}
             className="bg-blue-700 flex items-center mx-1 justify-center text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
             type="button"
@@ -158,7 +159,7 @@ export default function Page() {
             <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
             </svg>
-            Add Category
+            Add Products
           </button>
         </div>
       </div>
@@ -228,176 +229,26 @@ export default function Page() {
     return (
       <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
         <TableActions className="mt-3" searchTerm={searchTerm} handleSearch={handleSearch} />
-        {showModal && <CreateModal category={category} />}
-        {deleteModal && <DeleteModal category={category} />}
+        {deleteModal && <DeleteModal product={product} />}
         <div className="overflow-x-auto">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <ItemsTable items={categories?.data} />
+            <ItemsTable items={products?.data} />
           </div>
         </div>
-        <TableFooter totalPages={categories?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
+        <TableFooter totalPages={products?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
         {/* <DeleteToast /> */}
         <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     );
   };
 
-  const CreateModal = (category) => {
-    const [selectedImage, setSelectedImage] = useState(category?.category?.photo_url);
-
-    async function handleSubmit(event) {
-      event.preventDefault();
-      if (!selectedImage) {
-        toast.error("Please select image", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
-        return;
-      }
-      const formData = new FormData();
-      formData.append("category_name", event.target.elements.name.value);
-      formData.append("image", event.target.elements.image.files[0]);
-      if (category.category) {
-        try {
-          const data = await updateCategory(category?.category?.id, formData);
-          console.log(data);
-          toast.success("success updated data", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
-          });
-          setTimeout(() => {
-            setShowModal(false);
-          }, 2000);
-        } catch (error) {
-          toast.error("success updated data", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
-          });
-        }
-        return;
-      }
-      try {
-        const response = await createCategory(formData);
-        console.log(response);
-        event.target.reset();
-
-        toast.success("success created data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
-
-        setTimeout(() => {
-          setShowModal(false);
-        }, 2000);
-      } catch (error) {
-        toast.success("success updated data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
-      }
-    }
-
-    return (
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden fixed z-50 inset-0 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative mt-6 w-full max-w-lg max-h-full">
-          {/* <!-- Modal content --> */}
-          <div class="relative bg-gray-700 border-black border-2 rounded-lg shadow-lg dark:bg-gray-700">
-            {/* <!-- Modal header --> */}
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 class="text-xl font-semibold text-white dark:text-white">{category.category ? "Update Category" : "Create Category"}</h3>
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-hide="authentication-modal"
-              >
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                </svg>
-                <span class="sr-only">Close modal</span>
-              </button>
-            </div>
-            {/* <!-- Modal body --> */}
-            <div class="p-4 md:p-5">
-              <form class="space-y-4" action="#" onSubmit={handleSubmit}>
-                <div>
-                  <label for="name" class="block mb-2 text-sm font-medium text-white dark:text-white">
-                    Category Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder=""
-                    required
-                    defaultValue={category?.category?.category_name}
-                  />
-                </div>
-                <label class="block mb-2 text-sm font-medium text-white dark:text-white" for="file_input">
-                  Upload file
-                </label>
-                {selectedImage ? <img className="w-full h-auto mt-[-10px]" src={selectedImage} alt="Selected Image" style={{ maxWidth: "500px", height: "300px", objectFit: "cover" }} /> : null}
-                <input
-                  class="block w-full text-sm text-gray-900 -mt-10 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                  aria-describedby="file_input_help"
-                  id="image"
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    setSelectedImage(URL.createObjectURL(file));
-                  }}
-                />
-                <button
-                  type="submit"
-                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  {category.category ? "Update" : "Create"}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const DeleteModal = (category) => {
+  const DeleteModal = (product) => {
     async function handleDelete() {
       try {
-        const data = await deleteCategory(category?.category?.id);
+        console.log(product);
+        const data = await deleteProducts(product?.product?.id);
         console.log(data);
-        toast.success("success delete data", {
+        toast.success("success update data", {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: false,

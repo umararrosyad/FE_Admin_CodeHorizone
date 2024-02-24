@@ -39,6 +39,10 @@ export default function DashboardSidebarLayout({ children }) {
   useEffect(() => {
     //get current url path
     setActiveLink(pathname);
+    const data = localStorage.getItem('token');
+    if(!data){
+      router.push("/");
+    }
     //init flowbite
     initFlowbite();
   }, [pathname]);
