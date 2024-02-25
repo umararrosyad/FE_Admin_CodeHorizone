@@ -2,9 +2,13 @@
 
 import { instance as axios } from "../axios";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTcwNjc5MDczNn0.crNpraUq0j84lSvWzqQAVdmx1JOWsZmRa4kwpChEpZU";
-const getAllTypes = async (id) => {
+const getAllUsers = async (page, searchTerm) => {
   try {
-    const response = await axios.get(`/api/v1/products/${id}/types`);
+    const params = {
+      page,
+      name: searchTerm
+    };
+    const response = await axios.get(`/api/v1/users/`, { params });
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -77,4 +81,4 @@ const deleteTypes = async (id, type_id) => {
   }
 };
 
-module.exports = { login, getAllTypes, createTypes, getOneProducts, updateTypes, deleteTypes };
+module.exports = { login, getAllUsers, createTypes, getOneProducts, updateTypes, deleteTypes };

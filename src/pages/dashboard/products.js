@@ -34,6 +34,10 @@ export default function DashboardSidebarLayout({ children }) {
       router.push("/dashboard/categories");
     } else if (location === "werehouse") {
       router.push("/dashboard/werehouses");
+    } else if (location === "users") {
+      router.push("/dashboard/users");
+    } else if (location === "transaction") {
+      router.push("/dashboard/transaction");
     }
     initFlowbite();
   }, [location]);
@@ -52,7 +56,6 @@ export default function DashboardSidebarLayout({ children }) {
       <div className=" sm:ml-64 mt-16">
         <Products />
       </div>
-      
     </div>
   );
 }

@@ -8,10 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
-import Products from "@/layout/products_copy";
-import Categories from "@/layout/categories";
-import Dashboard from "@/layout/dashboard";
-import Werehouse from "@/layout/werehouse";
+import Users from "@/layout/transaction";
 
 import { useRouter } from "next/router";
 
@@ -32,13 +29,11 @@ export default function DashboardSidebarLayout({ children }) {
       router.push("/dashboard/categories");
     } else if (location === "werehouse") {
       router.push("/dashboard/werehouses");
-    } else if (location === "werehouse") {
-      router.push("/dashboard/werehouses");
     } else if (location === "users") {
-      router.push("/dashboard/users");
+        router.push("/dashboard/users");
     } else if (location === "transaction") {
-      router.push("/dashboard/transaction");
-    }
+        router.push("/dashboard/transaction");
+      }
     initFlowbite();
   }, [location]);
 
@@ -54,7 +49,7 @@ export default function DashboardSidebarLayout({ children }) {
       <Navbar />
       <Sidebar location={location} />
       <div className=" sm:ml-64 mt-16">
-        <Categories />
+        <Users />
       </div>
     </div>
   );

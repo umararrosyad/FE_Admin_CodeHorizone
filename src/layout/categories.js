@@ -38,10 +38,10 @@ export default function Page() {
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className=" max-w-full px-6 py-3">
               Name
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="max-w-full px-6 py-3">
               Photo
             </th>
             <th scope="col" className="px-6 py-3">
@@ -51,7 +51,7 @@ export default function Page() {
         </thead>
         <tbody>
           {items?.map((item) => (
-            <tr key={`${item.id}`} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr key={`${item.id}`} className="w-full bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
               <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                 <div className="pl-3 flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   <div className="text-base font-semibold">{item.category_name}</div>
@@ -61,7 +61,7 @@ export default function Page() {
               <td className="px-6 py-4 ">
                 <img className="w-20 h-20 rounded-xl object-contain" src={item.photo_url} alt="Jese image" />
               </td>
-              <td className="px-6 py-4">
+              <td className=" justify-end px-6 py-4">
                 <button
                   type="button"
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -114,7 +114,7 @@ export default function Page() {
 
     return (
       <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-        <div className="w-full md:w-1/2">
+        <div className="w-full">
           <form onSubmit={handleSubmit} className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Search
