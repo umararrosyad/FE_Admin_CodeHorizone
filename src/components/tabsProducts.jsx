@@ -18,7 +18,7 @@ const Navbar = () => {
           <a
             href="#"
             class={`inline-flex items-center px-4 pe-20 py-3 ${
-              location === "product" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-900 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+              location === "product" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-800 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
             } rounded-lg active w-full `}
             aria-current="page"
             onClick={() => {
@@ -35,7 +35,7 @@ const Navbar = () => {
           <a
             href="#"
             class={`inline-flex items-center px-4 pe-20 py-3 ${
-              location === "galleries" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-900 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+              location === "galleries" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-800 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
             } rounded-lg active w-full `}
             onClick={() => {
               dispatch(setProductLocation("galleries"));
@@ -51,7 +51,7 @@ const Navbar = () => {
           <a
             href="#"
             class={`inline-flex items-center px-4 pe-20 py-3 ${
-              location === "types" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-900 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+              location === "types" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-800 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
             } rounded-lg active w-full `}
             onClick={() => {
               dispatch(setProductLocation("types"));
@@ -67,7 +67,7 @@ const Navbar = () => {
           <a
             href="#"
             class={`inline-flex items-center px-4 pe-20 py-3 ${
-              location === "sizes" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-900 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+              location === "sizes" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-800 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
             } rounded-lg active w-full `}
             onClick={() => {
               dispatch(setProductLocation("sizes"));
@@ -84,7 +84,7 @@ const Navbar = () => {
           <a
             href="#"
             class={`inline-flex items-center px-4 pe-20 py-3 ${
-              location === "variant" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-900 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+              location === "variant" ? "text-white dark:bg-blue-600 bg-blue-700" : " text-white hover:text-gray-900 bg-gray-800 hover:bg-gray-100  dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
             } rounded-lg active w-full `}
             onClick={() => {
               dispatch(setProductLocation("variant"));

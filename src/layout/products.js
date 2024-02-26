@@ -120,8 +120,8 @@ export default function Page() {
     };
 
     return (
-      <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-        <div className="w-full">
+      <div className="flex flex-col md:flex-row  items-center shadow-lg justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+        <div className="w-full ">
           <form onSubmit={handleSubmit} className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Search
@@ -227,7 +227,7 @@ export default function Page() {
     };
 
     return (
-      <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 relative shadow-lg rounded-lg overflow-hidden">
         <TableActions className="mt-3" searchTerm={searchTerm} handleSearch={handleSearch} />
         {deleteModal && <DeleteModal product={product} />}
         <div className="overflow-x-auto">
@@ -237,7 +237,6 @@ export default function Page() {
         </div>
         <TableFooter totalPages={products?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
         {/* <DeleteToast /> */}
-        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     );
   };
@@ -248,6 +247,7 @@ export default function Page() {
         console.log(product);
         const data = await deleteProducts(product?.product?.id);
         console.log(data);
+        setDeleteModal(false);
         toast.success("success update data", {
           position: "bottom-right",
           autoClose: 2000,
@@ -258,10 +258,6 @@ export default function Page() {
           progress: undefined,
           theme: "light"
         });
-
-        setTimeout(() => {
-          setDeleteModal(false);
-        }, 2000);
       } catch (error) {
         toast.error("Erorr delete data", {
           position: "bottom-right",
@@ -393,13 +389,12 @@ export default function Page() {
     );
   };
 
-  
-
   //main
   return (
     <section className="blur-lg">
       <div className={`mx-auto max-w-screen-xl p-5 lg:px-12 ${showModal ? "blur-lg" : ""}`}>
         <ItemsTableContainer />
+        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     </section>
   );

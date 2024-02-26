@@ -99,7 +99,7 @@ const Navbar = () => {
   }
   return (
     <>
-      <div class="p-6 h-auto bg-gray-900 text-medium text-gray-100 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+      <div class="p-6 h-auto bg-gray-800 text-medium text-gray-100 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
         <form class="space-y-4" action="#" onSubmit={handlsubmit}>
           <div>
             <label for="name" class="block mb-2 text-sm font-medium text-white dark:text-white">
@@ -134,7 +134,7 @@ const Navbar = () => {
           </select>
 
           <label for="werehouse" class="block mb-2 text-sm font-medium text-white dark:text-white">
-            Select an werehouse
+            Select an warehouse
           </label>
           <select
             id="werehouse"

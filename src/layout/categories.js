@@ -33,10 +33,37 @@ export default function Page() {
     fetchBook();
   }, [currentPage, searchTerm, showModal, deleteModal]);
 
+
+  function toats(status, pesan){
+    if(status == "success"){
+      toast.success(pesan, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    }else{
+      toast.error(pesan, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    }
+  }
+
   const ItemsTable = ({ items }) => {
     return (
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-900 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className=" max-w-full px-6 py-3">
               Name
@@ -113,7 +140,7 @@ export default function Page() {
     };
 
     return (
-      <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+      <div className="flex flex-col md:flex-row items-center shadow-lg justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
         <div className="w-full">
           <form onSubmit={handleSubmit} className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
@@ -221,7 +248,7 @@ export default function Page() {
     };
 
     return (
-      <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 relative shadow-lg rounded-lg overflow-hidden">
         <TableActions className="mt-3" searchTerm={searchTerm} handleSearch={handleSearch} />
         {showModal && <CreateModal category={category} />}
         {deleteModal && <DeleteModal category={category} />}
@@ -232,7 +259,6 @@ export default function Page() {
         </div>
         <TableFooter totalPages={categories?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
         {/* <DeleteToast /> */}
-        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     );
   };
@@ -243,16 +269,7 @@ export default function Page() {
     async function handleSubmit(event) {
       event.preventDefault();
       if (!selectedImage) {
-        toast.error("Please select image", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
+        toats("error","Please select image" )
         return;
       }
       const formData = new FormData();
@@ -262,30 +279,10 @@ export default function Page() {
         try {
           const data = await updateCategory(category?.category?.id, formData);
           console.log(data);
-          toast.success("success updated data", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
-          });
-          setTimeout(() => {
-            setShowModal(false);
-          }, 2000);
+          setShowModal(false);
+          toats("success","success updated data" )
         } catch (error) {
-          toast.error("success updated data", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
-          });
+          toats("error","error updated data" )
         }
         return;
       }
@@ -294,31 +291,11 @@ export default function Page() {
         console.log(response);
         event.target.reset();
 
-        toast.success("success created data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
+        setShowModal(false);
+        toats("success","success created data" )
 
-        setTimeout(() => {
-          setShowModal(false);
-        }, 2000);
       } catch (error) {
-        toast.success("success updated data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
+        toats("error","error created data" )
       }
     }
 
@@ -392,31 +369,12 @@ export default function Page() {
       try {
         const data = await deleteCategory(category?.category?.id);
         console.log(data);
-        toast.success("success delete data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
+        setDeleteModal(false);
+        toats("success","success delete data" )
 
-        setTimeout(() => {
-          setDeleteModal(false);
-        }, 2000);
       } catch (error) {
-        toast.error("Erorr delete data", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
+        toats("error","error updated data" )
+
       }
     }
 
@@ -542,6 +500,7 @@ export default function Page() {
     <section className="blur-lg">
       <div className={`mx-auto max-w-screen-xl p-5 lg:px-12 ${showModal ? "blur-lg" : ""}`}>
         <ItemsTableContainer />
+        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     </section>
   );

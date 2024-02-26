@@ -1,16 +1,18 @@
 // const axios = require('axios');
 
-import { instance as axios } from "../axios";
-const getAllTransaction = async (page, status) => {
+import axios from "axios";
+const sendVerification = async (data) => {
   try {
-    const params = {
-      page,
-      status
-    };
-    const response = await axios.get(`/api/v1/transactions/`, { params });
-    return response.data;
+    await axios
+      .post("https://api.emailjs.com/api/v1.0/email/send", data)
+      .then((response) => {
+        console.log("Your mail is sent!", response);
+      })
+      .catch((error) => {
+        console.log("Oops... " + error);
+      });
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 };
 
@@ -46,7 +48,7 @@ const updateTransaction = async (id, transaction_status) => {
     const requestData = {
       transaction_status
     };
-    const response = await axios.put(`/api/v1/transactions/${id}`, requestData, {
+    const response = await axios.post(`/api/v1/transactions/${id}`, requestData, {
       headers: { "Content-Type": "application/json" }
     });
     return response;
@@ -67,4 +69,4 @@ const deleteSizes = async (id, size_id) => {
   }
 };
 
-module.exports = { getAllTransaction, updateTransaction, getOneTransaction };
+module.exports = { sendVerification, updateTransaction, getOneTransaction };

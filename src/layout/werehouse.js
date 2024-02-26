@@ -93,13 +93,13 @@ export default function Page() {
               </td>
               <td className="py-4">
                 <div className="pl-3 flex flex-col py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <div className="text-base font-semibold">{item.city_name}</div>
+                  <div className="text-base font-semibold">{item.city.city_name}</div>
                   <div className="font-normal text-gray-500">Raja Ongkir ID : {item.city_id}</div>
                 </div>
               </td>
               <td className=" py-4">
                 <div className="pl-3 flex flex-col py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <div className="text-base font-semibold">{item.province_name}</div>
+                  <div className="text-base font-semibold">{item.province.province_name}</div>
                   <div className="font-normal text-gray-500">Raja Ongkir ID : {item.province_id}</div>
                 </div>
               </td>
@@ -274,7 +274,6 @@ export default function Page() {
         </div>
         <TableFooter totalPages={werehouses?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
         {/* <DeleteToast /> */}
-        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       </div>
     );
   };
@@ -297,7 +296,7 @@ export default function Page() {
       const werehouse_name = event.target.elements.name.value;
       const address = event.target.elements.address.value;
 
-      if (city == "Choose City" && province == "Choose Province") {
+      if (city == "Choose City" || province == "Choose Province") {
         toast.error("Please select location", {
           position: "bottom-right",
           autoClose: 2000,
@@ -312,9 +311,10 @@ export default function Page() {
       }
       if (werehouse?.werehouse) {
         try {
-          console.log(werehouse_name);
+          console.log(werehouse?.werehouse?.id, werehouse_name, address, province, city);
           const data = await updateWerehouse(werehouse?.werehouse?.id, werehouse_name, address, province, city);
           console.log(data);
+          setShowModal(false);
           toast.success("success updated data", {
             position: "bottom-right",
             autoClose: 2000,
@@ -325,9 +325,6 @@ export default function Page() {
             progress: undefined,
             theme: "light"
           });
-          setTimeout(() => {
-            setShowModal(false);
-          }, 2000);
         } catch (error) {
           toast.error("error updated data", {
             position: "bottom-right",
@@ -345,7 +342,8 @@ export default function Page() {
       try {
         const response = await createWerehouse(werehouse_name, address, province, city);
         event.target.reset();
-
+        
+        setShowModal(false);
         toast.success("success created data", {
           position: "bottom-right",
           autoClose: 2000,
@@ -356,10 +354,6 @@ export default function Page() {
           progress: undefined,
           theme: "light"
         });
-
-        setTimeout(() => {
-          setShowModal(false);
-        }, 2000);
       } catch (error) {
         toast.success("success updated data", {
           position: "bottom-right",
@@ -381,7 +375,7 @@ export default function Page() {
           <div class="relative bg-gray-700 border-black border-2 rounded-lg shadow-lg dark:bg-gray-700">
             {/* <!-- Modal header --> */}
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 class="text-xl font-semibold text-white dark:text-white">{werehouse.werehouse ? "Update Werehouse" : "Create Werehouse"}</h3>
+              <h3 class="text-xl font-semibold text-white dark:text-white">{werehouse.werehouse ? "Update Warehouse" : "Create Warehouse"}</h3>
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
@@ -399,7 +393,7 @@ export default function Page() {
               <form class="space-y-4" action="#" onSubmit={handleSubmit}>
                 <div>
                   <label for="name" class="block mb-2 text-sm font-medium text-white dark:text-white">
-                    Werehouse Name
+                    Warehouse Name
                   </label>
                   <input
                     type="text"
@@ -435,13 +429,13 @@ export default function Page() {
                 >
                   {selectedProvince ? (
                     <option selected value={selectedProvince}>
-                      {provinces[selectedProvince - 1].province}
+                      {provinces[selectedProvince - 1].province_name}
                     </option>
                   ) : (
                     <option selected>Choose Province</option>
                   )}
                   {provinces?.map((province) => (
-                    <option value={province.province_id}>{province.province}</option>
+                    <option value={province.id}>{province.province_name}</option>
                   ))}
                 </select>
 
@@ -455,12 +449,12 @@ export default function Page() {
                 >
                   {selectedProvince == werehouse?.werehouse?.province_id && werehouse?.werehouse?.city_id ? (
                     <option selected value={werehouse?.werehouse?.city_id}>
-                      {cities[werehouse?.werehouse?.city_id - 1].city_name}
+                      {cities[werehouse?.werehouse?.id - 1].city_name}
                     </option>
                   ) : (
                     <option selected>Choose city</option>
                   )}
-                  {cities?.map((city) => (selectedProvince == city.province_id ? <option value={city.city_id}>{city.city_name}</option> : ""))}
+                  {cities?.map((city) => (selectedProvince == city.province_id ? <option value={city.id}>{city.city_name}</option> : ""))}
                 </select>
                 <button
                   type="submit"
@@ -629,7 +623,10 @@ export default function Page() {
   //main
   return (
     <section className="blur-lg">
-      <div className={`mx-auto max-w-screen-xl p-5 lg:px-12 ${showModal ? "blur-lg" : ""}`}><ItemsTableContainer /></div>
+      <div className={`mx-auto max-w-screen-xl p-5 lg:px-12 ${showModal ? "blur-lg" : ""}`}>
+        <ItemsTableContainer />
+        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
+      </div>
     </section>
   );
 }

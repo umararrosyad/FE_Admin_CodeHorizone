@@ -33,7 +33,7 @@ export default function DashboardSidebarLayout({ children }) {
   return (
     <div>
       <Navbar />
-      <div className=" sm:mx-14 mt-20">
+      <div className=" sm:mx-14 mt-24">
         <div class="md:flex">
           <Tabs />
           <Form />

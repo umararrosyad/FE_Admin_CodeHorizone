@@ -41,14 +41,14 @@ export default function DashboardSidebarLayout({ children }) {
   }
   useEffect(() => {
     setActiveLink(pathname);
-    dispatch(setProductLocation("product"))
+    dispatch(setProductLocation("product"));
     initFlowbite();
   }, [pathname]);
 
   return (
     <div>
       <Navbar />
-      <div className=" sm:mx-14 mt-20">
+      <div className=" sm:mx-14 mt-24">
         <div class="md:flex">
           <Tabs />
           {mainContent}

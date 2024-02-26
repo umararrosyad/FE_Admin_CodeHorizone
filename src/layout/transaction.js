@@ -63,7 +63,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}  rounded-s-lg focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}  rounded-s-lg focus:outline-none dark:bg-gray-700 dark:text-white`}
               aria-current="page"
               onClick={() => setStatus("")}
             >
@@ -73,7 +73,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Belum Dibayar" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Belum Dibayar" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Belum Dibayar")}
             >
               Belum Bayar
@@ -82,7 +82,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Sudah Dibayar" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Sudah Dibayar" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Sudah Dibayar")}
             >
               Sudah Bayar
@@ -91,7 +91,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Dikemas" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Dikemas" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Dikemas")}
             >
               Dikemas
@@ -100,7 +100,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Dikirim" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Dikirim" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Dikirim")}
             >
               Dikirim
@@ -109,7 +109,7 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Diterima" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Diterima" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Diterima")}
             >
               Diterima
@@ -118,16 +118,21 @@ export default function Page() {
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Selesai" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Selesai" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"}   focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Selesai")}
             >
               Selesai
+              {/* <div className="flex flex-row gap-2 justify-center">
+                <div>{"Selesai "}</div>
+                <div class="flex w-5 h-5  justify-center text-white bg-red-700 rounded-full top-0 left-0">1</div>
+              </div> */}
             </a>
           </li>
+
           <li class="w-full focus-within:z-10">
             <a
               href="#"
-              class={`inline-block w-full p-4 ${status === "Dibatalkan" ? "bg-gray-300 text-gray-900" : "bg-white text-gray-800 hover:text-gray-700"} rounded-e-lg focus:outline-none dark:bg-gray-700 dark:text-white`}
+              class={`inline-block w-full p-4 ${status === "Dibatalkan" ? "bg-gray-800  text-white" : "bg-white text-gray-800 hover:text-gray-700"} rounded-e-lg focus:outline-none dark:bg-gray-700 dark:text-white`}
               onClick={() => setStatus("Dibatalkan")}
             >
               Dibatalkan
@@ -193,17 +198,17 @@ export default function Page() {
   const Card = (item) => {
     return (
       <>
-        <div class="w-full max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div class=" rounded-md bg-gray-300 flex items-center justify-between p-4">
+        <div class="w-full max-w-full bg-white border border-gray-400 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div class=" rounded-t-lg bg-gray-800  flex items-center justify-between p-4">
             <div class="flex items-center">
               <div class="flex-shrink-0 gap-2 ">
                 <img class="w-8 h-8 rounded-full" src={item?.item?.user?.photo_url ? item?.item?.user?.photo_url : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="Neil image" />
               </div>
-              <p class="text-sm font-medium ps-5 text-gray-900 truncate dark:text-white">{item?.item?.user?.name}</p>
+              <p class="text-lg font-medium px-3 text-white pe">{item?.item?.user?.name}</p>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <p class="text-lg font-medium  text-gray-900 truncate dark:text-white pe-1">{item?.item?.transaction_status}</p>
-              <p class="text-lg font-medium  text-gray-900 truncate dark:text-white pe-1">|</p>
+              <p class="text-lg font-medium  text-white pe-1">{item?.item?.transaction_status}</p>
+              <p class="text-lg font-medium  text-white pe-1">|</p>
               <Link href={`/transactions/${item?.item?.id}`}>
                 <button type="button" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
@@ -252,7 +257,7 @@ export default function Page() {
             <Card item={transaction} />
           </div>
         ))}
-        <div className=" w-full rounded-lg bg-white border mt-3 shadow-md border-gray-300">
+        <div className=" w-full rounded-lg bg-white border mt-3 shadow-md border-gray-400">
           <TableFooter totalPages={transactions?.pagination.totalPages} handleChangePage={handleChangePage} currentPage={currentPage} />
         </div>
       </div>

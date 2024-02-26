@@ -41,6 +41,7 @@ const Navbar = () => {
         const response = await createSizes(id, name);
         console.log(response);
 
+        setShowModal(false);
         toast.success("success created data", {
           position: "bottom-right",
           autoClose: 2000,
@@ -52,9 +53,6 @@ const Navbar = () => {
           theme: "light"
         });
 
-        setTimeout(() => {
-          setShowModal(false);
-        }, 2000);
       } catch (error) {
         toast.error("success create data", {
           position: "bottom-right",
@@ -183,7 +181,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div class="p-6 mb-10 h-auto bg-gray-900 text-medium text-gray-100 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+      <div class="p-6 mb-10 h-auto bg-gray-800 text-medium text-gray-100 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 pb-4">
           <div className="w-full md:w-1/2">
             <div class="block -mt-3 text-2xl font-medium text-white dark:text-white">PRODUCTS TYPE</div>
