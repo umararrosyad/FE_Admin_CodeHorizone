@@ -4,14 +4,13 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { setSideLocation } from "@/store/reducers/sideLocation";
 
-
 const Navbar = () => {
-    const dispatch = useDispatch();
-    const location = useSelector((state) => state.sidebar.sideLocation);
+  const dispatch = useDispatch();
+  const location = useSelector((state) => state.sidebar.sideLocation);
 
-    const handleAsideClick = (location)=>{
-        dispatch(setSideLocation(location))
-    }
+  const handleAsideClick = (location) => {
+    dispatch(setSideLocation(location));
+  };
   return (
     <>
       <aside id="default-sidebar" class="fixed top-100 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
@@ -37,11 +36,7 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                onClick={() => handleAsideClick("products")}
-                className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "products" ? "bg-gray-700" : ""}`}
-              >
+              <a href="#" onClick={() => handleAsideClick("products")} className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "products" ? "bg-gray-700" : ""}`}>
                 {" "}
                 <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -57,12 +52,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-            <a
+              <a
                 href="#"
                 onClick={() => handleAsideClick("categories")}
                 className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "categories" ? "bg-gray-700" : ""}`}
-              >                
-              <svg
+              >
+                <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,30 +71,26 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-            <a
+              <a
                 href="#"
                 onClick={() => handleAsideClick("werehouse")}
                 className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "werehouse" ? "bg-gray-700" : ""}`}
-              >               
-              <svg
+              >
+                <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 20 18"
                 >
-                  <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3 21h18M4 18h16M6 10v8m4-8v8m4-8v8m4-8v8M4 9.5v-1c0-.3.2-.6.5-.8l7-4.5a1 1 0 0 1 1 0l7 4.5c.3.2.5.5.5.8v1c0 .3-.2.5-.5.5h-15a.5.5 0 0 1-.5-.5Z" />
                 </svg>
                 <span class="flex-1 ms-3 whitespace-nowrap">Warehouse</span>
               </a>
             </li>
             <li>
-            <a
-                href="#"
-                onClick={() => handleAsideClick("users")}
-                className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "users" ? "bg-gray-700" : ""}`}
-              >               
-              <svg
+              <a href="#" onClick={() => handleAsideClick("users")} className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "users" ? "bg-gray-700" : ""}`}>
+                <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,24 +103,28 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-            <a
+              <a
                 href="#"
                 onClick={() => handleAsideClick("transaction")}
                 className={`flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group ${location === "transaction" ? "bg-gray-700" : ""}`}
-              >               
-              <svg
+              >
+                <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 20 18"
                 >
-                  <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                  <path fill-rule="evenodd" d="M12 14a3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a3 3 0 0 1-3-3Zm3-1a1 1 0 1 0 0 2h4v-2h-4Z" clip-rule="evenodd" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.3 3.3a1 1 0 0 1 1.4 0L16.4 6h-2.8l-1.3-1.3a1 1 0 0 1 0-1.4Zm.1 2.7L9.7 3.3a1 1 0 0 0-1.4 0L5.6 6h6.8ZM4.6 7A2 2 0 0 0 3 9v10c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2h-4a5 5 0 0 1 0-10h4a2 2 0 0 0-1.5-2h-13Z"
+                    clip-rule="evenodd"
+                  />
                 </svg>
                 <span class="flex-1 ms-3 whitespace-nowrap">Transaction</span>
               </a>
             </li>
-           
           </ul>
         </div>
       </aside>

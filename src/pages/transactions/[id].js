@@ -145,7 +145,7 @@ export default function DashboardSidebarLayout() {
                 <li class="py-3 sm:py-4">
                   <div class="flex ">
                     <div class="flex-shrink-0">
-                      <img class="w-20 h-20 object-cover shadow-lg border border-gray-300" src={item?.product_variant?.product?.product_galleries[0]?.photo_url} alt="Neil image" />
+                      <img class="w-20 h-20 object-cover shadow-lg border border-gray-300" src={item?.product_variant?.product_type?.photo_url} alt="Neil image" />
                     </div>
                     <div class="flex flex-col mt-2 w-full min-w-0">
                       <p class="text-md font-medium ps-5 text-gray-900 truncate dark:text-white">{item?.product_variant?.product?.name}</p>
