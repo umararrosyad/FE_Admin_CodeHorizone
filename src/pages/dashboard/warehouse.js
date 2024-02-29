@@ -8,9 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
-import Products from "@/layout/products";
-import Categories from "@/layout/categories";
-import Dashboard from "@/layout/dashboard";
+
 import Werehouse from "@/layout/werehouse";
 
 import { useRouter } from "next/router";
@@ -30,8 +28,8 @@ export default function DashboardSidebarLayout({ children }) {
       router.push("/dashboard/products");
     } else if (location === "categories") {
       router.push("/dashboard/categories");
-    } else if (location === "werehouse") {
-      router.push("/dashboard/werehouses");
+    } else if (location === "warehouse") {
+      router.push("/dashboard/werehouse");
     } else if (location === "users") {
       router.push("/dashboard/users");
     } else if (location === "transaction") {

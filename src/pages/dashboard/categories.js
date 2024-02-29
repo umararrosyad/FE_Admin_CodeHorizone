@@ -31,9 +31,7 @@ export default function DashboardSidebarLayout({ children }) {
     } else if (location === "categories") {
       router.push("/dashboard/categories");
     } else if (location === "werehouse") {
-      router.push("/dashboard/werehouses");
-    } else if (location === "werehouse") {
-      router.push("/dashboard/werehouses");
+      router.push("/dashboard/warehouse");
     } else if (location === "users") {
       router.push("/dashboard/users");
     } else if (location === "transaction") {

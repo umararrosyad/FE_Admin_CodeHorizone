@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSideLocation } from "@/store/reducers/sideLocation";
 import React, { useEffect, useState } from "react";
 import { getAllGalleries, createGalleries, deleteGalleries } from "../modules/fetch/galleries";
-
 import { useRouter } from "next/router";
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
